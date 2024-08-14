@@ -1,1 +1,1 @@
-# gym-managements
+# gym-management
