@@ -10,14 +10,17 @@ class AccountsConfig(AppConfig):
     name = 'accounts'
 
 
-    def ready(self):
-        self.load_organization_databases()
+    # def ready(self):
+    #     self.load_organization_databases()
 
     def load_organization_databases(self):
+        """
+        Method to load organization databases dynamically based on GymDetails
+        """
         from .models import GymDetails
         
-        organizations = GymDetails.objects.all()
-        for org in organizations:
+        gyms = GymDetails.objects.all()
+        for org in gyms:
             db_name = f'{org.db_name}_db'
             settings.DATABASES[db_name] = {
                 'ENGINE': 'django.db.backends.postgresql',

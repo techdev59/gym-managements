@@ -5,6 +5,9 @@ from django.utils.translation import gettext as _
 # Create your models here.
 
 class Member(models.Model):
+    """
+    Represents a gym member.
+    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -19,6 +22,9 @@ class Member(models.Model):
     
 
 class MemberEntry(models.Model):
+    """
+    Represents an entry record for a gym member.
+    """
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     entry_time = models.DateTimeField(auto_now_add=True)
     exit_time = models.DateTimeField(null=True, blank=True)
@@ -28,6 +34,9 @@ class MemberEntry(models.Model):
     
     
 class Trainer(models.Model):
+    """
+    Represents a trainer at the gym.
+    """
     name = models.CharField(max_length=100)
     specialty = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -40,6 +49,9 @@ class Trainer(models.Model):
     
     
 class GymClass(models.Model):
+    """
+    Represents a gym class.
+    """
     name = models.CharField(max_length=100)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
@@ -53,6 +65,9 @@ class GymClass(models.Model):
     
 
 class Payment(models.Model):
+    """
+    Represents a payment made by a gym member.
+    """
     ONLINE = 'online'
     CASH = 'cash'
     PAYMENT_METHOD = (

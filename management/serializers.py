@@ -3,6 +3,9 @@ from .models import Member, Trainer, GymClass, Payment, MemberEntry
 
 
 class MemberSerializer(serializers.Serializer):
+    """
+    Serializer for Member model.
+    """
     id = serializers.IntegerField(read_only=True)
     first_name = serializers.CharField(max_length=100)
     last_name = serializers.CharField(max_length=100)
@@ -14,10 +17,16 @@ class MemberSerializer(serializers.Serializer):
     updated_at = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
+        """
+        Create a new Member instance.
+        """
         db_name = self.context.get('db_name')
         return Member.objects.using(db_name).create(**validated_data)
 
     def update(self, instance, validated_data):
+        """
+        Update an existing Member instance.
+        """
         db_name = self.context.get('db_name')
         
         instance.first_name = validated_data.get('first_name', instance.first_name)
@@ -32,16 +41,25 @@ class MemberSerializer(serializers.Serializer):
     
 
 class MemberEntrySerializer(serializers.Serializer):
+    """
+    Serializer for MemberEntry model.
+    """
     id = serializers.IntegerField(read_only=True)
     member_id = serializers.IntegerField()
     entry_time = serializers.DateTimeField(read_only=True)
     exit_time = serializers.DateTimeField(required=False, allow_null=True)
 
     def create(self, validated_data):
+        """
+        Create a new MemberEntry instance.
+        """
         db_name = self.context.get('db_name')
         return MemberEntry.objects.using(db_name).create(**validated_data)
 
     def update(self, instance, validated_data):
+        """
+        Update an existing MemberEntry instance.
+        """
         db_name = self.context.get('db_name')
         
         instance.member_id = validated_data.get('member_id', instance.member_id)
@@ -53,6 +71,9 @@ class MemberEntrySerializer(serializers.Serializer):
 
 
 class TrainerSerializer(serializers.Serializer):
+    """
+    Serializer for Trainer model.
+    """
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=100)
     specialty = serializers.CharField(max_length=100)
@@ -62,10 +83,16 @@ class TrainerSerializer(serializers.Serializer):
     updated_at = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
+        """
+        Create a new Trainer instance.
+        """
         db_name = self.context.get('db_name')
         return Trainer.objects.using(db_name).create(**validated_data)
 
     def update(self, instance, validated_data):
+        """
+        Update an existing Trainer instance.
+        """
         db_name = self.context.get('db_name')
         
         instance.name = validated_data.get('name', instance.name)
@@ -78,6 +105,9 @@ class TrainerSerializer(serializers.Serializer):
 
 
 class GymClassSerializer(serializers.Serializer):
+    """
+    Serializer for GymClass model.
+    """
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=100)
     trainer_id = serializers.IntegerField()
@@ -89,12 +119,18 @@ class GymClassSerializer(serializers.Serializer):
     
 
     def create(self, validated_data):
+        """
+        Create a new GymClass instance.
+        """
         db_name = self.context.get('db_name')
         gym_class = GymClass.objects.using(db_name).create(**validated_data)
         return gym_class
 
 
     def update(self, instance, validated_data):
+        """
+        Update an existing GymClass instance.
+        """
         db_name = self.context.get('db_name')
 
         instance.name = validated_data.get('name', instance.name)
@@ -109,6 +145,9 @@ class GymClassSerializer(serializers.Serializer):
 
 
 class PaymentSerializer(serializers.Serializer):
+    """
+    Serializer for Payment model.
+    """
     id = serializers.IntegerField(read_only=True)
     member_id = serializers.IntegerField()
     amount = serializers.DecimalField(max_digits=10, decimal_places=2)
@@ -118,10 +157,16 @@ class PaymentSerializer(serializers.Serializer):
     updated_at = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
+        """
+        Create a new Payment instance.
+        """
         db_name = self.context.get('db_name')
         return Payment.objects.using(db_name).create(**validated_data)
 
     def update(self, instance, validated_data):
+        """
+        Update an existing Payment instance.
+        """
         db_name = self.context.get('db_name')
         
         instance.member_id = validated_data.get('member_id', instance.member_id)

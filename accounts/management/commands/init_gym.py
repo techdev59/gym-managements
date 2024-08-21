@@ -4,11 +4,14 @@ from accounts.models import GymDetails
 from django.conf import settings
 
 class Command(BaseCommand):
+    """
+    Management command to initialize databases for all gyms and apply migrations
+    """
     help = 'Initialize databases for all gyms and apply migrations'
 
     def handle(self, *args, **kwargs):
-        for organization in GymDetails.objects.all():
-            db_name = f'{organization.db_name}_db'
+        for gym in GymDetails.objects.all():
+            db_name = f'{gym.db_name}_db'
             if db_name in settings.DATABASES:
                 # Apply all migrations for the new database
                 try:

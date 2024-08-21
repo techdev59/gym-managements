@@ -14,6 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 class CustomUserManager(BaseUserManager):
+    """
+    Custom manager for the CustomUser model
+
+    Args:
+        BaseUserManager: The base user manager class
+    """
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("The email field must be set")
@@ -40,6 +46,13 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    User model for storing user information
+
+    Args:
+        AbstractBaseUser: Abstract base user class
+        PermissionsMixin: Mixin for adding permission-related attributes and methods
+    """
     name = models.CharField(max_length=255)
     phone = models.CharField(_("phone number"), max_length=20)
     email = models.EmailField(_("email"), max_length=255, unique=True)
@@ -60,6 +73,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 
 class GymDetails(models.Model):
+    """
+    Model for storing gym details
+
+    Attributes:
+        name (str): The name of the gym
+        db_name (str): The name of the gym's database
+        admin (User): The admin user associated with the gym
+        created_at (datetime): The creation time of the gym details
+        updated_at (datetime): The last update time of the gym details
+    """
     name = models.CharField(max_length=255)
     db_name = models.CharField(max_length=255)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -77,6 +100,12 @@ class GymDetails(models.Model):
         
 
 def create_gym_database(db_name):
+    """
+    Function to create a new database for a gym
+
+    Args:
+        db_name (str): The name of the gym's database
+    """
     db_name = f'{db_name}_db'
 
     # Establish a connection to the default PostgreSQL database
