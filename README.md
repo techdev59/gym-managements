@@ -2,7 +2,7 @@
   <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" width="100" />
 </p>
 <p align="center">
-    <h1 align="center">GYM-MANAGEMENTS</h1>
+    <h1 align="center">GYM-MANAGEMENTS Django APP by Webmevericks Softcoders</h1>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/github/license/techdev59/gym-managements.git?style=flat&color=0080ff" alt="license">
